@@ -19,7 +19,7 @@ for folder in folderList:
     for file in fileList:
         if fileType in file:
             file = file.replace(fileType,'')
-            videoPathList.append([folder,file,fileType])
+            videoPathList.append([folder,file,fileType,'1'])
 
 #Load the MobileNet Model
 model = torch.hub.load('pytorch/vision:v0.4.2', 'mobilenet_v2', pretrained=True)
@@ -80,7 +80,7 @@ for video in videoPathList:
         frameFeatures.append(output[0].tolist())
 
     #Write Frame Features to Csv File
-    csvPath = 'FeatureVectors/'
+    csvPath = 'FeatureVectors/'+video[3]+'/'
     with open(csvPath+video[0] + '-' + video[1]+'.csv', "w", newline="") as f:
         writer = csv.writer(f)
         writer.writerows(frameFeatures)
