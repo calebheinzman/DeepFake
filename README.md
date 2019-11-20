@@ -1,5 +1,5 @@
 # Setup:
-1. Run `pip install --requirement requirements.txt'
+1. Run `pip install --requirement requirements.txt`
 
 # Purpose
 The purpose of this project is to input videos and get corresponding feature vectors. We are using pytorch's pretrained models 
