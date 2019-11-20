@@ -7,7 +7,7 @@ from torchvision import transforms
 import torch
 import torch.nn as nn
 import torchvision.models as models
-
+import InceptionModel
 
 #Get List of Vidoes
 dataPath = 'Data/deepfaketimit/DeepfakeTIMIT/lower_quality'
@@ -24,9 +24,9 @@ for folder in folderList:
             videoPathList.append([folder,file,fileType,'1'])
 
 #Load the MobileNet Model
-model = models.inception_v3(pretrained=True)
+model = InceptionModel.inception_v3(pretrained=True)
 model.eval()
-
+count = 0
 for video in videoPathList:
     print(video)
     # File Name of Video
@@ -71,13 +71,10 @@ for video in videoPathList:
             input_batch = input_batch.to('cuda')
             model.to('cuda')
 
-        #Removes Output Layer
-        new_classifier = nn.Sequential(*list(model.module.classifier.children())[:-1])
-        model.classifier = new_classifier
+
         #Gets Feature Vector
         with torch.no_grad():
             output = model(input_batch)
-            print(output[0].__len__())
 
         #Append Frame feature to list for entire video
         frameFeatures.append(output[0].tolist())
@@ -87,3 +84,5 @@ for video in videoPathList:
     with open(csvPath+video[0] + '-' + video[1]+'.csv', "w", newline="") as f:
         writer = csv.writer(f)
         writer.writerows(frameFeatures)
+    count = count +1
+    print(count)

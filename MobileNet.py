@@ -24,6 +24,7 @@ for folder in folderList:
 #Load the MobileNet Model
 model = torch.hub.load('pytorch/vision:v0.4.2', 'mobilenet_v2', pretrained=True)
 model.eval()
+print(model)
 
 for video in videoPathList:
     print(video)
@@ -72,12 +73,14 @@ for video in videoPathList:
         #Removes Output Layer
         new_classifier = nn.Sequential(*list(model.classifier.children())[:-1])
         model.classifier = new_classifier
+        print(model)
         #Gets Feature Vector
         with torch.no_grad():
             output = model(input_batch)
 
         #Append Frame feature to list for entire video
         frameFeatures.append(output[0].tolist())
+        print(output.shape)
 
     #Write Frame Features to Csv File
     csvPath = 'FeatureVectors/'+video[3]+'/'
