@@ -1,4 +1,6 @@
 # Project exclude paths
 /venv/
 /Data/
+/InceptionFeatureVectors/
+/FeatureVectors/
 

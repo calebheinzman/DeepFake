@@ -5,9 +5,7 @@ import numpy as np
 from PIL import Image
 from torchvision import transforms
 import torch
-import torch.nn as nn
-import torchvision.models as models
-import InceptionModel
+from SupportingsFiles import InceptionModel
 
 #Get List of Vidoes
 dataPath = 'Data/deepfaketimit/DeepfakeTIMIT/lower_quality'

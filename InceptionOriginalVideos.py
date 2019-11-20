@@ -1,12 +1,10 @@
 import csv
 import os
 import cv2
-import numpy as np
 from PIL import Image
 from torchvision import transforms
 import torch
-import torch.nn as nn
-import InceptionModel
+from SupportingsFiles import InceptionModel
 
 #Get list of all frames
 dataPath = 'Data/originaltimit/'
