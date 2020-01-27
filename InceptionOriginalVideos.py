@@ -31,9 +31,10 @@ model = InceptionModel.inception_v3(pretrained=True)
 model.eval()
 
 count = 0
-for video in videos:
+videoCount = 0;
+for videoCount in range (0,159):
     frameFeatures = []
-    for frame in video:
+    for frame in videos[videoCount]:
 
         img = cv2.imread(frame[0])
         img = Image.fromarray(img)
@@ -61,7 +62,7 @@ for video in videos:
         frameFeatures.append(output[0].tolist())
 
     #Write Frame Features to Csv File
-    csvPath = 'FeatureVectors/'+frame[4] + '/'
+    csvPath = 'InceptionFeatureVectors/'+frame[4] + '/'
     with open(csvPath+frame[1] + '-' + frame[2]+'.csv', "w", newline="") as f:
         writer = csv.writer(f)
         writer.writerows(frameFeatures)
